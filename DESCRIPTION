@@ -1,0 +1,9 @@
+Package: rgit
+Type: Package
+Title: Wrapper for git app, with gitAFile and gitPush
+Version: 0.5
+Date: 2020-06-11
+Author: John Wallace (John.Wallace@noaa.gov)
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
