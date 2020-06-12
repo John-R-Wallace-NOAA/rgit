@@ -19,7 +19,7 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     
        cat(paste0("\nThe directory: ", repo, " will be removed.\n"))
        switch(menu(c("Stop?", "Delete the directory and continue?")) + 1,
-           stop("Stopped by user."), stop("Stopped by user."), cat("\n\n"))
+           stop("Stopped by user."), stop("Stopped by user."), cat("\n"))
     }
    
     system(paste0("rm -r -f ", repo)) # Make sure the repo directory is deleted 
@@ -48,7 +48,7 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     
     setwd(paste0(HomeDir, repo))
     if(verbose) 
-        cat("\n Working directory is now:", getwd(), "\n")
+        cat("\nWorking directory is now:", getwd(), "\n")
     
     for (i in paste0(paste0(subDir,"/"), list))  {
     
@@ -60,16 +60,16 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     JRWToolBox::git('commit --amend --no-edit --allow-empty')  
     JRWToolBox::git('push -u -v --force origin master')
     if(verbose)
-       cat(paste0("\n Files that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
+       cat(paste0("\nFiles that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
     
     setwd(HomeDir)
     if(verbose) 
-        cat("\n Working directory is now:", getwd(), "\n\n")
+        cat("\nWorking directory is now:", getwd(), "\n\n")
     
     if(deleteRepoAfterPush) {
        system(paste0("rm -r -f ", repo))
        if(verbose) 
-          cat(" The local", repo, "directory was deleted.\n\n")   
+          cat("The local", repo, "directory was deleted.\n\n")   
     }
     
     invisible() 

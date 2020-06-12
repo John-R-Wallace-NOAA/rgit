@@ -24,7 +24,7 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     # Show the file in the working directory.
     file.show('git.R')  
     
-    # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo.
+    # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo (need permissions to push).
     gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) 
     
     # A normal call with defaults.
