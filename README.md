@@ -51,3 +51,6 @@ Verbose output below with default removal of cloned repo
      The local copy of rgit has been pushed to GitHub.
     
      Working directory is now: C:/Users/Public 
+     
+     The local rgit directory was deleted.
+
