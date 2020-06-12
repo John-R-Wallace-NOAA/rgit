@@ -28,6 +28,7 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     
 Verbose output below with default removal of cloned repo
 
+    gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)
 
     The directory: rgit will be removed.
     
