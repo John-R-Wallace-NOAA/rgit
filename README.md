@@ -29,28 +29,38 @@ Look at the git() wrapper function from this repo and show how it could be pushe
 Verbose output below with default removal of cloned repo
 
 
-    gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE)  
-
     The directory: rgit will be removed.
-
-     1: Stop?
-     2: Delete the directory and continue?
-
-     Selection: 2
-
-
-    Files cloned from  rgit :
-    [1] "DESCRIPTION" "NAMESPACE"   "R"           "README.md"  
+    
+    1: Stop?
+    2: Delete the directory and continue?
+    
+    Selection: 2
+    
+    
+    The home directory is:  C:/Users/Public/
+    
+    The git URL is: https://github.com/John-R-Wallace-NOAA/rgit.git
+    
+    The list of files to be pushed is:
+     git.R gitPush.R
+    
+    Files and directories cloned from rgit:
+       DESCRIPTION gitPush.R NAMESPACE R README.md 
+    
     
      git.R was copied from C:/Users/Public/ to rgit/R 
     
-     Working directory is now: C:/Users/Public/rgit 
+     gitPush.R was copied from C:/Users/Public/ to rgit/R 
+    
+    Working directory is now: C:/Users/Public/rgit 
     
      R/git.R was added to the local repo.
     
-     The local copy of rgit has been pushed to GitHub.
+     R/gitPush.R was added to the local repo.
     
-     Working directory is now: C:/Users/Public 
-     
-     The local rgit directory was deleted.
-
+    Files that are changed in the local repo of rgit have been pushed to GitHub.
+    
+    Working directory is now: C:/Users/Public 
+    
+    The local rgit directory was deleted.
+    
