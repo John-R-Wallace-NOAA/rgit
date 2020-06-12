@@ -9,21 +9,26 @@ rgit requires the git app (https://git-scm.com/downloads) to be installed.  You 
 
 Look at the git() wrapper function from this repo and show how it could be pushed back to here (with the correct permissions):
 
+    # Set the repoPath to the one you will be using.
+    repoPath <- "John-R-Wallace-NOAA/rgit"
     
-    repoPath <- "John-R-Wallace-NOAA/rgit"  # Set the repoPath to the one you will be using.
+    # Pull the file directly from GitHub with all comments shown and long line width 
+    S(git) 
     
-    S(git) # Pull the file directly from GitHub with all comments shown and long line width 
+    # Pull and save 'git.R' to the working directory [getwd()]. 
+    gitAFile(paste0(repoPath, "/master/R/git.R"), "script", File = "git.R", show = FALSE)  
     
-    gitAFile(paste0(repoPath, "/master/R/git.R"), "script", File = "git.R", show = FALSE) # Pull and save 'git.R' to the working directory [getwd()] 
-    
-    # This would normally be done with a properly user configured gitEdit() function
+    # This would normally be done with a properly user configured gitEdit() function.
     # gitEdit(git)
     
-    file.show('git.R')  # Show the file in the working directory
-
-    gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) # Inspect what is going on.
+    # Show the file in the working directory.
+    file.show('git.R')  
     
-    gitPush(git.R, subDir = 'R')  # A normal call with defaults. 
+    # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo.
+    gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) 
+    
+    # A normal call with defaults.
+    gitPush(git.R, subDir = 'R')   
     
     
 Verbose output below with default removal of cloned repo
