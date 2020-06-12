@@ -70,3 +70,4 @@ Verbose output below with default removal of cloned repo
     
     The local rgit directory was deleted.
     
+Until I add a verify feature, on first use in a new repo doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
