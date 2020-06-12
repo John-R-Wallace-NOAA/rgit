@@ -1,7 +1,8 @@
 
-gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
+gitPush <- function(..., list = character(), gitDir = ifelse(exists('repoPath', where = 1), get('repoPath', pos = 1), repoPath), 
+                                    gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
 
-    # Initial setup - the oddity of calling a character vector 'list' keeped from the rm() function code.
+    # Initial setup - the oddity of calling a character vector 'list' keeped from the 'rm' function code.
     
     dots <- match.call(expand.dots = FALSE)$...
     if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
@@ -10,11 +11,16 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     names <- vapply(dots, as.character, "")
     if (length(names) == 0L) 
         names <- character()
+        
+        
     list <- .Primitive("c")(list, names)
     
-    HomeDir <- paste0(getwd(), "/")
     
-    repo <- JRWToolBox::get.subs(gitDir, "/")[2] # Avoid the list produced by strsplit() (I wrote get.subs() to work in both R and SPlus before strsplit() came out.) 
+    HomeDir <- paste0(getwd(), "/")
+    if(verbose) 
+         cat("\n\nThe home directory is:", HomeDir, "\n\nThe git directory is:", gitDir, "\n", sep = "")
+   
+    repo <- JRWToolBox::get.subs(gitDir, "/")[2] # Avoid the list produced by strsplit() [I wrote get.subs() in SPlus before strsplit() came out.] 
     if(dir.exists(repo)) {
     
        cat(paste0("\nThe directory: ", repo, " will be removed.\n"))
@@ -30,27 +36,23 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     JRWToolBox::git(paste0("clone https://github.com/", gitDir, ".git"))
     
     if(verbose) {
-       cat("\n\nThe home directory is: ", HomeDir)
-       cat("\n\nThe git URL is: https://github.com/", gitDir, ".git", sep = "")
-       cat("\n\nThe list of files to be pushed is:\n", list)
-       cat("\n\nFiles and directories cloned from ", repo, ":\n", sep = "")
-       cat("  ", vapply(list.files(repo), as.character, ""), "\n\n")
+       cat("Files cloned from ", repo, ":\n", sep = "")
+       print(list.files(repo))
     }
     
     # Copy the files to the local repo, add the files to the repo, and push the repo (only files that are changed are moved, that's how git push works).
     
     for (i in list)  {
-    
-      file.copy(i, paste0(repo, "/", subDir), overwrite = TRUE)
+      file.copy(i, repo, overwrite = TRUE)
       if(verbose)
-         cat("\n", i, "was copied from", HomeDir, "to", paste0(repo, "/", subDir), "\n")
+         cat("\n", i, "was copied from", HomeDir, "to", repo, "\n")
     }
     
     setwd(paste0(HomeDir, repo))
     if(verbose) 
         cat("\n Working directory is now:", getwd(), "\n")
     
-    for (i in paste0(paste0(subDir,"/"), list))  {
+    for (i in list)  {
     
       JRWToolBox::git(paste0('add ', i))
       if(verbose)
@@ -60,16 +62,16 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     JRWToolBox::git('commit --amend --no-edit --allow-empty')  
     JRWToolBox::git('push -u -v --force origin master')
     if(verbose)
-       cat(paste0("\n Files that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
+       cat(paste0("\n The local copy of ", repo, " has been pushed to GitHub.\n"))
     
     setwd(HomeDir)
     if(verbose) 
-        cat("\n Working directory is now:", getwd(), "\n\n")
+        cat("\n Working directory is now:", getwd(), "\n")
     
     if(deleteRepoAfterPush) {
        system(paste0("rm -r -f ", repo))
        if(verbose) 
-          cat(" The local", repo, "directory was deleted.\n\n")   
+          cat("\n The local", repo, "directory was deleted.\n")   
     }
     
     invisible() 
