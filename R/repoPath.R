@@ -1,1 +1,1 @@
-repoPath <- "John-R-Wallace-NOAA/JRWToolBox/master/R/"
+repoPath <- "John-R-Wallace-NOAA/JRWToolBox"
