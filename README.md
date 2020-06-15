@@ -35,7 +35,7 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     gitPush(git.R, subDir = 'R')   
     
     
-Verbose output below with 2 files being pushed and the default removal of the cloned repo:
+Verbose output below with 2 files (git.R & gitPush.R) being pushed and the default removal of the cloned repo:
 
     gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)
 
