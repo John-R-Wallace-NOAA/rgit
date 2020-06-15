@@ -9,6 +9,7 @@ rgit requires the git app (https://git-scm.com/downloads) to be installed.  You 
 Example usage:
 
 Look at the git() wrapper function from this repo and show how it could be pushed back to here (with the correct permissions):
+
     # Use with GitHub
     # Set the GitHub repoPath to the one you will be using.
     repoPath <- "John-R-Wallace-NOAA/rgit"
