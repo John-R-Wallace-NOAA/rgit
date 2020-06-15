@@ -15,23 +15,23 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     # Set the GitHub repoPath to the one you will be using.
     repoPath <- "John-R-Wallace-NOAA/rgit"
     
-    # Pull the file directly from GitHub to view with all comments shown and unchanged usert line widths  
+    # Pull the file directly from GitHub to view with all comments shown and unchanged user line widths  
     #    (functions installed with the remotes or devtools packages have comments stripped and shortened line widths)
     S(git) 
     
-    # Pull and save 'git.R' to the working directory [getwd()]. 
+    # Pull and save 'git.R' to the working directory [getwd()] 
     gitAFile(paste0(repoPath, "/master/R/git.R"), "script", File = "git.R", show = FALSE)  
     
-    # This would normally be done with a properly user configured gitEdit() function.
+    # This would normally be done with a properly user configured gitEdit() function
     # gitEdit(git)
     
-    # Show the file in the working directory.
+    # Show the file in the working directory
     file.show('git.R')  
     
-    # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo (need permissions to push).
+    # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo (need permissions to push)
     gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) 
     
-    # A normal call with defaults.
+    # A normal call with defaults
     gitPush(git.R, subDir = 'R')   
     
     
