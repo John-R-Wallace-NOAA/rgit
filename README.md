@@ -14,8 +14,8 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     # Set the GitHub repoPath to the one you will be using.
     repoPath <- "John-R-Wallace-NOAA/rgit"
     
-    # Pull the file directly from GitHub to view with all comments shown and long line width 
-    #    (functions installed with the remotes or devtools packages have comments stripepd and a short line width)
+    # Pull the file directly from GitHub to view with all comments shown and unchanged usert line widths  
+    #    (functions installed with the remotes or devtools packages have comments stripped and shortened line widths)
     S(git) 
     
     # Pull and save 'git.R' to the working directory [getwd()]. 
