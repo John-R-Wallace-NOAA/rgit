@@ -5,7 +5,8 @@ Install with:
       remotes::install_github("John-R-Wallace-NOAA/rgit")
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
-
+#
+Example usage:
 
 Look at the git() wrapper function from this repo and show how it could be pushed back to here (with the correct permissions):
 
