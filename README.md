@@ -43,9 +43,9 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
         gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, 
         verbose = FALSE) 
         
-    gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)
+    gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)  # As in rm(), a mixture of quoted and unquoted file names can be used
 
-    The directory: rgit will be removed.
+    The local directory: rgit will be removed.
     
     1: Stop?
     2: Delete the directory and continue?
