@@ -1,8 +1,8 @@
 
-gitPush <- function(..., list = character(), gitDir = ifelse(exists('repoPath', where = 1), get('repoPath', pos = 1), repoPath), 
-                                    gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
+gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
+                     autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
 
-    # Initial setup - the oddity of calling a character vector 'list' keeped from the 'rm' function code.
+    # Initial setup - the oddity of calling a character vector 'list' keeped from the rm() function code.
     
     dots <- match.call(expand.dots = FALSE)$...
     if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
@@ -11,71 +11,74 @@ gitPush <- function(..., list = character(), gitDir = ifelse(exists('repoPath', 
     names <- vapply(dots, as.character, "")
     if (length(names) == 0L) 
         names <- character()
-        
-        
     list <- .Primitive("c")(list, names)
     
-    
     HomeDir <- paste0(getwd(), "/")
-    if(verbose) 
-         cat("\n\nThe home directory is:", HomeDir, "\n\nThe git directory is:", gitDir, "\n", sep = "")
-   
-    repo <- JRWToolBox::get.subs(gitDir, "/")[2] # Avoid the list produced by strsplit() [I wrote get.subs() in SPlus before strsplit() came out.] 
+    
+    repo <- JRWToolBox::get.subs(gitDir, "/")[2] # Avoid the list produced by strsplit() (I wrote get.subs() to work in both R and SPlus before strsplit() came out.) 
     if(dir.exists(repo)) {
     
        cat(paste0("\nThe directory: ", repo, " will be removed.\n"))
        switch(menu(c("Stop?", "Delete the directory and continue?")) + 1,
-           stop("Stopped by user."), stop("Stopped by user."), cat("\n\n"))
+           stop("Stopped by user."), stop("Stopped by user."), cat("\n"))
     }
    
     system(paste0("rm -r -f ", repo)) # Make sure the repo directory is deleted 
     
     # Download function and scripts from GitHub (you will be asked once for your password, if you are not already logged into GitHub).
-    JRWToolBox::git(paste0("config --global user.name '", gitUserName, "'"))
-    JRWToolBox::git(paste0("config --global user.email '", gitUserEmail, "'"))
-    JRWToolBox::git(paste0("clone https://github.com/", gitDir, ".git"))
+    rgit::git(paste0("config --global user.name --replace-all '", gitUserName, "'"), autoExit = autoExit)
+    rgit::git(paste0("config --global user.email --replace-all '", gitUserEmail, "'"), autoExit = autoExit)
+    rgit::git(paste0("clone https://github.com/", gitDir, ".git"), autoExit = autoExit)
     
     if(verbose) {
-       cat("Files cloned from ", repo, ":\n", sep = "")
-       print(list.files(repo))
+       cat("\n\nThe local working directory is: ", HomeDir)
+       cat("\n\nThe git URL is: https://github.com/", gitDir, ".git", sep = "")
+       cat("\n\nThe list of files to be pushed is:\n", list)
+       cat("\n\nFiles and directories cloned from the remote ", repo, " repo:\n", sep = "")
+       cat("  ", vapply(list.files(repo), as.character, ""), "\n")
     }
     
     # Copy the files to the local repo, add the files to the repo, and push the repo (only files that are changed are moved, that's how git push works).
     
     for (i in list)  {
-      file.copy(i, repo, overwrite = TRUE)
+    
+      file.copy(i, paste0(repo, "/", subDir), overwrite = TRUE)
       if(verbose)
-         cat("\n", i, "was copied from", HomeDir, "to", repo, "\n")
+         cat("\n", i, "was copied from", HomeDir, "to", paste0(repo, "/", subDir), "\n")
     }
     
     setwd(paste0(HomeDir, repo))
     if(verbose) 
-        cat("\n Working directory is now:", getwd(), "\n")
+        cat("\nWorking directory is now:", getwd(), "\n")
     
-    for (i in list)  {
+    for (i in paste0(paste0(subDir,"/"), list))  {
     
-      JRWToolBox::git(paste0('add ', i))
+      rgit::git(paste0('add ', i), autoExit = autoExit)
       if(verbose)
          cat("\n", i, "was added to the local repo.\n")
     }
     
-    JRWToolBox::git('commit --amend --no-edit --allow-empty')  
-    JRWToolBox::git('push -u -v --force origin master')
+    rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '"'), autoExit = autoExit)  # The message text needs double quotes (") to work
+    rgit::git('push -u -v --force-with-lease origin master', autoExit = autoExit) 
+        
     if(verbose)
-       cat(paste0("\n The local copy of ", repo, " has been pushed to GitHub.\n"))
+       cat(paste0("\nFiles that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
     
     setwd(HomeDir)
     if(verbose) 
-        cat("\n Working directory is now:", getwd(), "\n")
+        cat("\nWorking directory is now:", getwd(), "\n\n")
     
     if(deleteRepoAfterPush) {
        system(paste0("rm -r -f ", repo))
        if(verbose) 
-          cat("\n The local", repo, "directory was deleted.\n")   
+          cat("The local", repo, "directory was deleted.\n\n")   
     }
     
-    invisible() 
+    invisible()
 }
+
+
+
 
 
 
