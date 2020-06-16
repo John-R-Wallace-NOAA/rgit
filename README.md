@@ -14,7 +14,7 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     # Use with GitHub
     # Set the GitHub repoPath, gitName, and gitEmail to the ones you will be using.
     repoPath <- "John-R-Wallace-NOAA/rgit"
-    gitName <- "John-R-Wallace-NOAA" 
+     gitName <- "John-R-Wallace-NOAA" 
     gitEmail <- "john.wallace@noaa.gov"
 
     # Pull the file directly from GitHub to view with all comments shown and unchanged user line widths  
