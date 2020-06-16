@@ -81,3 +81,14 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
     The local rgit directory was deleted.
     
 Until I add a verify feature, on first use in a new repo doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
+# 
+Changing accounts
+To change accounts that the Windows git app uses go to:
+
+    Control Panel > User Accounts > Credential Manager > Window Credentials > Generic Credentials
+
+and remove the entry for the current account.  See:  https://snede.net/git-does-not-remember-username-password/
+
+On next use of the Windows git app you will be prompted for the different account's credentials.
+
+
