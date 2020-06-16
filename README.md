@@ -82,7 +82,8 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
     
 Until I add a verify feature, on first use in a new repo doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
 # 
-Changing accounts
+Changing accounts:
+
 To change accounts that the Windows git app uses go to:
 
     Control Panel > User Accounts > Credential Manager > Window Credentials > Generic Credentials
