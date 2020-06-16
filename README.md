@@ -6,7 +6,7 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
-The git() function is a wrapper for the git app, and hence any git action be done from within R:
+The git() function is a wrapper for the git app, and hence any git action can be done from within R:
 
     rgit::git("config --global user.name John-R-Wallace-NOAA")
     
