@@ -1,5 +1,5 @@
 
-S <- function(File, show = TRUE, ...) {
+S <- function(File, repoPath = repoPath, show = TRUE, ...) {
     if (!(is.character(substitute(File))))
         File <- deparse(substitute(File))
 
