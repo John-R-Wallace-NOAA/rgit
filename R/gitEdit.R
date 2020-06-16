@@ -1,4 +1,4 @@
-gitEdit <- function (File, repoPath = repoPath, gitPath = paste0(repoPath, "/master/R/"))
+gitEdit <- function (File, repoPath. = repoPath, gitPath = paste0(repoPath., "/master/R/"))
 {
     if (!(is.character(substitute(File)))) 
         File <- paste0(deparse(substitute(File)), ".R")
