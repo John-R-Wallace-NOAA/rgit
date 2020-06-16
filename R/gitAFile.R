@@ -2,13 +2,13 @@
 gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, show = FALSE, viewOnly = FALSE, 
                       deleteFileObj = ifelse(is.null(File), TRUE, FALSE), rawGitPrefix = TRUE, verbose = FALSE, ...) 
 {
-  # Example:  gitAFile("John-R-Wallace-NOAA/JRWToolBox/master/R/gitAFile.R")
+  # Example:  gitAFile("John-R-Wallace-NOAA/rgit/master/R/gitAFile.R")
   # Adds the raw GitHub prefix to create a full URL when type = "function", i.e.: paste0("https://raw.githubusercontent.com", "John-R-Wallace-NOAA/JRWToolBox@master/R/panel.conf.pred.band.R") 
   # Set rawGitPrefix = FALSE to not add a prefix.
     
   # Example of pdf download: gitAFile("https://github.com/James-Thorson/VAST/blob/master/manual/VAST_model_structure.pdf", "pdf")
-  # Or directly using browseGitPDF: JRWToolBox::browseGitPDF("https://github.com/James-Thorson/VAST/blob/master/manual/VAST_model_structure.pdf")
-  # Displaying pdf's from GitHub: https://webapps.stackexchange.com/questions/48061/can-i-trick-github-into-displaying-the-pdf-in-the-browser-instead-of-downloading 
+  # Or directly using browseGitPDF: rgit::browseGitPDF("https://github.com/James-Thorson/VAST/blob/master/manual/VAST_model_structure.pdf")
+  # See displaying pdf's from GitHub: https://webapps.stackexchange.com/questions/48061/can-i-trick-github-into-displaying-the-pdf-in-the-browser-instead-of-downloading 
   
     JRWToolBox::lib(RCurl)
     Source <- function(file, ...) {
