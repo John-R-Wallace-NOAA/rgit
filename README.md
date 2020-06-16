@@ -13,7 +13,7 @@ The git() function is a wrapper for the git app, and hence any git action be don
     gitEmail <- "john.wallace@noaa.gov"
     rgit::git(paste0("config --global user.email '", gitUserEmail, "'"))
     
-    rgit::git(paste0("clone https://github.com/", gitDir, ".git"))
+    rgit::git("clone https://github.com/John-R-Wallace-NOAA/rgit.git")
     
     i <- 'gitEdit.R'
     rgit::git(paste0('add ', i))
