@@ -33,18 +33,18 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo (would need permissions to push)
     gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) 
     
-    # A normal call with defaults
-    gitPush(git.R, subDir = 'R')   
     
-    
-Verbose output with 2 files (git.R & gitPush.R) being pushed and the default removal of the cloned repo:
-
-    # As in rm() and other functions, the dots ('...') come first so the other arguments need to named
+    # As in rm() and other functions, the dots ('...') come first so the other arguments need to be fully named
     args(gitPush)  
     function (..., list = character(), gitDir = repoPath, subDir = NULL, 
         gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, 
         verbose = FALSE) 
-        
+    
+    # A normal call with defaults
+     gitPush(git.R, subDir = 'R')  # Full argument name 'subDir' used 
+    
+Verbose output with 2 files (git.R & gitPush.R) being pushed and the default removal of the cloned repo:
+ 
     gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)  # As in rm(), a mixture of quoted and unquoted file names can be used
 
     The local directory: rgit will be removed.
