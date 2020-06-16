@@ -104,7 +104,7 @@ Until I add a verify feature, on first use in a new repo doublecheck that the co
 # 
 Changing accounts:
 
-To change accounts that the Windows git app uses go to:
+To change accounts, that the Windows git app uses, go to:
 
     Control Panel > User Accounts > Credential Manager > Window Credentials > Generic Credentials
 
