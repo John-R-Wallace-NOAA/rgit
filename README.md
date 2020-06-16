@@ -37,13 +37,12 @@ Look at the git() wrapper function from this repo and show how it could be pushe
     
 Verbose output below with 2 files (git.R & gitPush.R) being pushed and the default removal of the cloned repo:
 
-
-      args(gitPush)  # As in rm() and other functions, the dots ('...') come first so the other arguments need to named
+    # As in rm() and other functions, the dots ('...') come first so the other arguments need to named
+      args(gitPush)  
     function (..., list = character(), gitDir = repoPath, subDir = NULL, 
         gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, 
         verbose = FALSE) 
-    NULL
-
+        
     gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)
 
     The directory: rgit will be removed.
