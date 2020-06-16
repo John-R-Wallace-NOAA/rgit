@@ -25,9 +25,9 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     system(paste0("rm -r -f ", repo)) # Make sure the repo directory is deleted 
     
     # Download function and scripts from GitHub (you will be asked once for your password, if you are not already logged into GitHub).
-    JRWToolBox::git(paste0("config --global user.name '", gitUserName, "'"))
-    JRWToolBox::git(paste0("config --global user.email '", gitUserEmail, "'"))
-    JRWToolBox::git(paste0("clone https://github.com/", gitDir, ".git"))
+    rgit::git(paste0("config --global user.name '", gitUserName, "'"))
+    rgit::git(paste0("config --global user.email '", gitUserEmail, "'"))
+    rgit::git(paste0("clone https://github.com/", gitDir, ".git"))
     
     if(verbose) {
        cat("\n\nThe home directory is: ", HomeDir)
@@ -52,13 +52,13 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     
     for (i in paste0(paste0(subDir,"/"), list))  {
     
-      JRWToolBox::git(paste0('add ', i))
+      rgit::git(paste0('add ', i))
       if(verbose)
          cat("\n", i, "was added to the local repo.\n")
     }
     
-    JRWToolBox::git('commit --amend --no-edit --allow-empty')  
-    JRWToolBox::git('push -u -v --force origin master')
+    rgit::git('commit --amend --no-edit --allow-empty')  
+    rgit::git('push -u -v --force origin master')
     if(verbose)
        cat(paste0("\nFiles that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
     
