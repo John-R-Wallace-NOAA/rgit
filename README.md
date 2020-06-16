@@ -73,14 +73,14 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
     Selection: 2
     
     
-    The home directory is:  C:/Users/Public/
+    The local working directory is:  C:/Users/Public/
     
     The git URL is: https://github.com/John-R-Wallace-NOAA/rgit.git
     
     The list of files to be pushed is:
      git.R gitPush.R
     
-    Files and directories cloned from rgit:
+    Files and directories cloned from remote rgit repo:
        DESCRIPTION gitPush.R NAMESPACE R README.md 
     
     
