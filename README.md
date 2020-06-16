@@ -6,6 +6,24 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
+The git() function is a wrapper for the git app, and hence any git action be done from within R:
+
+    rgit::git("config --global user.name John-R-Wallace-NOAA")
+    
+    gitEmail <- "john.wallace@noaa.gov"
+    rgit::git(paste0("config --global user.email '", gitUserEmail, "'"))
+    
+    rgit::git(paste0("clone https://github.com/", gitDir, ".git"))
+    
+    i <- 'gitEdit.R'
+    rgit::git(paste0('add ', i))
+    ...
+    
+    rgit::git('commit --amend --no-edit --allow-empty')  
+    rgit::git('push -u -v --force origin master')
+
+
+#
 Example usage:
 
 Look at the git() wrapper function from this repo and show how it could be pushed back to here (with the correct permissions):

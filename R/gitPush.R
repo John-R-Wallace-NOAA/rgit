@@ -30,11 +30,11 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     rgit::git(paste0("clone https://github.com/", gitDir, ".git"))
     
     if(verbose) {
-       cat("\n\nThe home directory is: ", HomeDir)
+       cat("\n\nThe local working directory is: ", HomeDir)
        cat("\n\nThe git URL is: https://github.com/", gitDir, ".git", sep = "")
        cat("\n\nThe list of files to be pushed is:\n", list)
-       cat("\n\nFiles and directories cloned from ", repo, ":\n", sep = "")
-       cat("  ", vapply(list.files(repo), as.character, ""), "\n\n")
+       cat("\n\nFiles and directories cloned from the remote ", repo, " repo:\n", sep = "")
+       cat("  ", vapply(list.files(repo), as.character, ""), "\n")
     }
     
     # Copy the files to the local repo, add the files to the repo, and push the repo (only files that are changed are moved, that's how git push works).
@@ -74,6 +74,7 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, g
     
     invisible() 
 }
+
 
 
 
