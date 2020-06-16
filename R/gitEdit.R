@@ -1,5 +1,6 @@
 gitEdit <- function (File, repoPath. = repoPath, gitPath = paste0(repoPath., "/master/R/"))
 {
+    repoPath. <- repoPath. # Need this so gitAFile sees the external repoPath
     if (!(is.character(substitute(File)))) 
         File <- paste0(deparse(substitute(File)), ".R")
     
