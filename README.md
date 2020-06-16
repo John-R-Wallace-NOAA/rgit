@@ -19,7 +19,7 @@ Look at the git() wrapper function from this repo and show how it could be pushe
 
     # Pull the file directly from GitHub to view with all comments shown and unchanged user line widths  
     #    (functions installed with the remotes or devtools packages have comments stripped and shortened line widths)
-    S(git) 
+    S(git, viewOnly = TRUE) 
     
     # Pull and save 'git.R' to the working directory [getwd()] 
     gitAFile(paste0(repoPath, "/master/R/git.R"), "script", File = "git.R", show = FALSE)  
