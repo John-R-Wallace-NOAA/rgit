@@ -30,7 +30,7 @@ All these steps are in the function gitPush() which can be called with autoExit 
     gitPush(gitPush.R, subDir = 'R', message = 'Fixed another comment', verbose = TRUE)   
 
 #
-More example usage:
+More example usage with additional information:
 
 Look at the git() wrapper function and show how it could be pushed back to this repo (with the correct permissions):
 
