@@ -25,7 +25,7 @@ The git() function is a wrapper for the git app, and hence any git action can be
     system("rm -r -f rgit") # Delete repo after push - inspect it before deletion if you like
     getwd()  # Check for original working directory
     
-All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE would be a good next step. Note that quotes on the file in current working direcotry to be pushed are optional:
+All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE would be a good next step. Note that quotes, on the file in current working direcotry to be pushed, are optional:
 
     gitPush(gitPush.R, subDir = 'R', message = 'Fixed another comment', verbose = TRUE)   
 
