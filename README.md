@@ -6,7 +6,7 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
-The git() function is a wrapper for the git app, and hence any git action can be done from within R. Below are the steps for pushing 'gitPush.R' with a comment change. 'gitPush.R' is in the working directory. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window at each step. Once the repo is cloned, 'git status' or other git commands can be given (the git push would require the correct permissions):
+The git() function is a wrapper for the git app, and hence any git action can be done from within R. Below are the steps for pushing 'gitPush.R' with a 'Comment change' message. 'gitPush.R' with a changed comment is in the current working directory. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given (the git push would require the correct permissions):
 
     getwd()  # Check working directory
     file.show('gitPush.R')   # Check the file in the working directory that is to be pushed 
@@ -25,15 +25,14 @@ The git() function is a wrapper for the git app, and hence any git action can be
     system("rm -r -f rgit") # Delete repo after push - inspect it before deletion if you like
     getwd()  # Check for original working directory
     
-The next step could be to only use autoExit = FALSE at the git push step:
+All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE would be a good next step:
 
-    
-
+    gitPush(gitPush.R, subDir = 'R', message = 'Fixed another comment', verbose = TRUE)   
 
 #
-Example usage:
+More example usage:
 
-Look at the git() wrapper function from this repo and show how it could be pushed back to here (with the correct permissions):
+Look at the git() wrapper function and show how it could be pushed back to this repo (with the correct permissions):
 
     library(rgit)
     # Use with GitHub
