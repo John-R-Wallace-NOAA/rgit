@@ -6,21 +6,28 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
-The git() function is a wrapper for the git app, and hence any git action can be done from within R:
+The git() function is a wrapper for the git app, and hence any git action can be done from within R. Below are the steps for pushing 'gitPush.R' with a comment change. 'gitPush.R' is in the working directory. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window at each step. Once the repo is cloned, 'git status' or other git commands can be given (the git push would require the correct permissions):
 
-    rgit::git("config --global user.name John-R-Wallace-NOAA")
+    getwd()  # Check working directory
+    file.show('gitPush.R')   # Check the file in the working directory that is to be pushed 
     
-    gitEmail <- "john.wallace@noaa.gov"
-    rgit::git(paste0("config --global user.email '", gitUserEmail, "'"))
+    system("rm -r -f , rgit") # Make sure the repo directory is deleted
+    git('config --global --replace-all user.name "John-R-Wallace-NOAA"', autoExit = FALSE)
+    git('config --global --replace-all user.email "john.wallace@noaa.gov"', autoExit = FALSE)
+    git('clone https://github.com/John-R-Wallace-NOAA/rgit.git', autoExit = FALSE)
+    file.copy('gitPush.R', 'rgit/R', overwrite = TRUE)
+    setwd('rgit')
+    git('add R/gitPush.R', autoExit = FALSE)
+    git('commit --amend --no-edit -m"Comment change"', autoExit = FALSE) # The informative comment comes after -m
+    git('status', autoExit = FALSE) # This status is confusing (to me at least)
+    git('push -u -v --force-with-lease origin master', autoExit = FALSE)  # 'git status' makes sense now.  
+    setwd('../')
+    system("rm -r -f rgit") # Delete repo after push - inspect it before deletion if you like
+    getwd()  # Check for original working directory
     
-    rgit::git("clone https://github.com/John-R-Wallace-NOAA/rgit.git")
+The next step could be to only use autoExit = FALSE at the git push step:
+
     
-    i <- 'gitEdit.R'
-    rgit::git(paste0('add ', i))
-    ...
-    
-    rgit::git('commit --amend --no-edit --allow-empty')  
-    rgit::git('push -u -v --force origin master')
 
 
 #
