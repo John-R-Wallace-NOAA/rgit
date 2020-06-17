@@ -41,8 +41,9 @@ Look at the git() wrapper function and show how it could be pushed back to this 
      gitName <- "John-R-Wallace-NOAA" 
     gitEmail <- "john.wallace@noaa.gov"
 
-    # Pull the file directly from GitHub to view with all comments shown and unchanged user line widths  
-    #    (functions installed with the remotes or devtools packages have comments stripped and shortened line widths)
+    # Use the function S() (for Show and/or Save) to pull the file directly from GitHub to view with all comments shown and with
+    #    unchanged user line widths (functions installed with the remotes or devtools packages have comments stripped and 
+    #    have shortened line widths)
     S(git, viewOnly = TRUE) 
     
     # Pull and save 'git.R' to the working directory [getwd()] 
@@ -51,14 +52,14 @@ Look at the git() wrapper function and show how it could be pushed back to this 
     # This would normally be done with a properly user configured gitEdit() function
     # gitEdit(git)
     
-    # Show the file in the working directory
+    # Show the file in the current working directory
     file.show('git.R')  
     
-    # Inspect what is going on with verbose = TRUE and inspecting the undeleted repo (would need permissions to push)
+    # Inspect what is going on with verbose = TRUE and by also looking at the undeleted repo
     gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) 
     
     
-    # As in rm() and other functions, the dots ('...') come first so the other arguments need to be fully named
+    # As in rm() and other functions, the ellipses ('...' see ?dots in R) come first so the other arguments need to be fully named
     args(gitPush)  
     function (..., list = character(), gitDir = repoPath, subDir = NULL, 
         gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, 

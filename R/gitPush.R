@@ -1,5 +1,5 @@
 
-gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
+gitPush <- function(..., list = character(), gitDir = repoPath, subDir = 'R', message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
                      autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
 
     # Initial setup - the oddity of calling a character vector 'list' keeped from the rm() function code.
@@ -76,6 +76,7 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = NULL, m
     
     invisible()
 }
+
 
 
 
