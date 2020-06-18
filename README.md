@@ -112,7 +112,7 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
     
 On first use in a new repo, doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
 
-Checking that files in the remote repo are same as those in the local working directory can be accomplished by folowing this example with gitPush:
+Checking that files in the remote repo are same as those in the local working directory can be accomplished by following this example with gitPush:
 
     gitPush_Remote <- S(gitPush, show = F, viewOnly = TRUE) # gitPush isn't saved to [[.GlobalEnv]] when viewOnly = TRUE 
     source('gitPush.R')
