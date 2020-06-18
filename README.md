@@ -110,7 +110,15 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
     
     The local rgit directory was deleted.
     
-Until I add a verify feature, on first use in a new repo doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
+On first use in a new repo, doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
+
+Checking that files in the remote repo are same as those in the local working directory can be accomplished by folowing this example with gitPush:
+
+    gitPush_Remote <- S(gitPush, show = F, viewOnly = TRUE) # 'gitPush' is not save to [[.GlobalEnv]] when 'viewOnly = TRUE' 
+    source('gitPush.R')
+    all.equal(gitPush_Git, gitPush_Remote)
+    rm(gitPush_Git, gitPush_Remote)
+
 # 
 Changing accounts:
 
