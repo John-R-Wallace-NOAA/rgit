@@ -27,7 +27,9 @@ The git() function is a wrapper for the git app, and hence any git action can be
     
 All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE would be a good next step. Note that quotes, on the file in current working direcotry to be pushed, are optional:
 
-    gitPush(gitPush.R, subDir = 'R', message = 'Fixed another comment', verbose = TRUE)   
+    gitPush(gitPush.R, message = 'Fixed another comment', verbose = TRUE)   
+    
+The default subdirectory to pus to is 'R'; to push a file to the main root of a repo use: subDir = NULL
 
 #
 More example usage with additional information:
