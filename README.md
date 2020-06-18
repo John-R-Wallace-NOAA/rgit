@@ -114,7 +114,7 @@ On first use in a new repo, doublecheck that the commit times on GitHub are rece
 
 Checking that files in the remote repo are same as those in the local working directory can be accomplished by folowing this example with gitPush:
 
-    gitPush_Remote <- S(gitPush, show = F, viewOnly = TRUE) # 'gitPush' is not save to [[.GlobalEnv]] when 'viewOnly = TRUE' 
+    gitPush_Remote <- S(gitPush, show = F, viewOnly = TRUE) # gitPush isn't saved to [[.GlobalEnv]] when viewOnly = TRUE 
     source('gitPush.R')
     all.equal(gitPush_Git, gitPush_Remote)
     rm(gitPush_Git, gitPush_Remote)
