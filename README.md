@@ -67,8 +67,8 @@ Look at the git() wrapper function and show how it could be pushed back to this 
         gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, 
         verbose = FALSE) 
     
-    # A normal call with defaults
-     gitPush(git.R, subDir = 'R')  # Full argument name 'subDir' used 
+    # If an argument is used, the full name needs to be given
+    gitPush(git.R, subDir = 'R') 
     
 Verbose output with 2 files (git.R & gitPush.R) being pushed and the default removal of the cloned repo:
  
