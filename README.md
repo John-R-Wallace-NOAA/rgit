@@ -43,9 +43,9 @@ Look at the git() wrapper function and show how it could be pushed back to this 
      gitName <- "John-R-Wallace-NOAA" 
     gitEmail <- "john.wallace@noaa.gov"
 
-    # Use the function S() (for Show and/or Save) to pull the file directly from GitHub to view with all comments shown and with
-    #    unchanged user line widths (functions installed with the remotes or devtools packages have comments stripped and 
-    #    have shortened line widths)
+    # Use the function S() (for Show and/or Save) to pull the file directly from GitHub to view with all comments shown 
+    #    and with unchanged user line widths (functions installed with the remotes or devtools packages have comments 
+    #    stripped and have shortened line widths)
     S(git, viewOnly = TRUE) 
     
     # Pull and save 'git.R' to the working directory [getwd()] 
@@ -61,7 +61,7 @@ Look at the git() wrapper function and show how it could be pushed back to this 
     gitPush(git.R, subDir = 'R',  gitDir = repoPath, verbose = TRUE, deleteRepoAfterPush = FALSE) 
     
     
-    # As in rm() and other functions, the ellipses ('...' see ?dots in R) come first so the other arguments need to be fully named
+    # As in rm() and other functions, when the ellipses ('...') come first the other arguments need to be fully named
     args(gitPush)  
     function (..., list = character(), gitDir = repoPath, subDir = NULL, 
         gitUserName = gitName, gitUserEmail = gitEmail, deleteRepoAfterPush = TRUE, 
@@ -71,8 +71,9 @@ Look at the git() wrapper function and show how it could be pushed back to this 
     gitPush(git.R, subDir = 'R') 
     
 Verbose output with 2 files (git.R & gitPush.R) being pushed and the default removal of the cloned repo:
- 
-    gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)  # As in rm(), a mixture of quoted and unquoted file names can be used
+   
+    # As in rm(), a mixture of quoted and unquoted file names can be used
+    gitPush(git.R, gitPush.R, subDir = 'R', verbose = TRUE)  
 
     The local directory: rgit will be removed.
     

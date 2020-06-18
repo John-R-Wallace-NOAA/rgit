@@ -1,5 +1,5 @@
 
-gitPush <- function(..., list = character(), gitDir = repoPath, subDir = 'R', message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
+gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R', message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
                      autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
 
     # Initial setup - the oddity of calling a character vector 'list' keeped from the rm() function code.
@@ -15,7 +15,7 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = 'R', me
     
     HomeDir <- paste0(getwd(), "/")
     
-    repo <- JRWToolBox::get.subs(gitDir, "/")[2] # Avoid the list produced by strsplit() (I wrote get.subs() to work in both R and SPlus before strsplit() came out.) 
+    repo <- JRWToolBox::get.subs(repoPath., "/")[2] # Avoid the list produced by strsplit() (I wrote get.subs() to work in both R and SPlus before strsplit() came out.) 
     if(dir.exists(repo)) {
     
        cat(paste0("\nThe directory: ", repo, " will be removed.\n"))
@@ -28,11 +28,11 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = 'R', me
     # Download function and scripts from GitHub (you will be asked once for your password, if you are not already logged into GitHub).
     rgit::git(paste0("config --global user.name --replace-all '", gitUserName, "'"), autoExit = autoExit)
     rgit::git(paste0("config --global user.email --replace-all '", gitUserEmail, "'"), autoExit = autoExit)
-    rgit::git(paste0("clone https://github.com/", gitDir, ".git"), autoExit = autoExit)
+    rgit::git(paste0("clone https://github.com/", repoPath., ".git"), autoExit = autoExit)
     
     if(verbose) {
        cat("\n\nThe local working directory is: ", HomeDir)
-       cat("\n\nThe git URL is: https://github.com/", gitDir, ".git", sep = "")
+       cat("\n\nThe git URL is: https://github.com/", repoPath., ".git", sep = "")
        cat("\n\nThe list of files to be pushed is:\n", list)
        cat("\n\nFiles and directories cloned from the remote ", repo, " repo:\n", sep = "")
        cat("  ", vapply(list.files(repo), as.character, ""), "\n")
@@ -76,6 +76,7 @@ gitPush <- function(..., list = character(), gitDir = repoPath, subDir = 'R', me
     
     invisible()
 }
+
 
 
 
