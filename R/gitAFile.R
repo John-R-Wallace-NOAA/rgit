@@ -48,7 +48,8 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
        
     if(grepl(type, "function")) {
           s.name <- Source(File.ASCII)
-          print(s.name)
+          if(verbose)
+             print(s.name)
           if(run) 
             eval(parse(text = s.name), envir = globalenv())(...)
           if(show)
