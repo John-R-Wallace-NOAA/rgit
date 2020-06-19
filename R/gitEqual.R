@@ -1,6 +1,6 @@
 
 
-gitEqual <- function(..., list = character(), Func, verbose = FALSE, subDir = 'R') {
+gitEqual <- function(..., list = character(), Func, subDir = 'R', verbose = FALSE) {
     
     dots <- match.call(expand.dots = FALSE)$...
     if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
