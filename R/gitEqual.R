@@ -1,4 +1,5 @@
 
+
 gitEqual <- function(..., list = character(), Func, verbose = FALSE, subDir = 'R') {
     
 	dots <- match.call(expand.dots = FALSE)$...
@@ -14,7 +15,12 @@ gitEqual <- function(..., list = character(), Func, verbose = FALSE, subDir = 'R
 	
 	JRWToolBox::Source(paste0(Func.Name, '.R'))
 	assign(Func.Name, eval(parse(text = Func.Name)), pos = 1)
-	if(verbose) print(eval(parse(text = Func.Name)))
+	if(verbose) {
+	
+	  cat("\nR object in Global area:", ls(pattern = Func.Name), "\n\n")
+	   print(eval(parse(text = Func.Name)))
+	   
+	}
 	
 	argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = TRUE, verbose = verbose, subDir = subDir)
 	Remote <- do.call(S, argList)
@@ -23,3 +29,5 @@ gitEqual <- function(..., list = character(), Func, verbose = FALSE, subDir = 'R
 	all.equal(eval(parse(text = Func.Name)), Remote)
 }	
 	
+
+
