@@ -82,7 +82,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
 	   
 	for( i in list) {
 	
-	   cat("\n", i, ":", gitEqual(list = i), "\n", sep = "")
+	   cat("\n", i, ":", rgit::gitEqual(list = i, subDir = subDir, verbose = verbose), "\n", sep = "")
     }
 	
     invisible()
