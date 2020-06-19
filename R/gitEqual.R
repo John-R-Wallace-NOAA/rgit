@@ -5,6 +5,7 @@ gitEqual <- function(Func, verbose = FALSE, ...) {
 	if(verbose) cat("\n\n", Func.Name, "\n")
 	
 	JRWToolBox::Source(paste0(Func.Name, '.R'))
+	assign(Func.Name, eval(parse(text = Func.Name)), pos = 1)
 	if(verbose) print(eval(parse(text = Func.Name)))
 	
 	argList <- c(list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = TRUE, verbose = verbose), ...)
