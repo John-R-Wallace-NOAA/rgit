@@ -26,7 +26,7 @@ gitEqual <- function(..., list = character(), Func, verbose = FALSE, subDir = 'R
     argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = TRUE, verbose = verbose, subDir = subDir)
     Remote <- do.call(S, argList)
     if(verbose) {
-       cat("\n\nRemote on", repoPath, ":\n\n", sep = "")
+       cat("\n\nRemote on ", repoPath, ":\n\n", sep = "")
        print(Remote); flush.console()
     }
     
