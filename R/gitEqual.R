@@ -1,7 +1,7 @@
 
 
 gitEqual <- function(..., list = character(), Func, verbose = FALSE, subDir = 'R') {
-    
+    ' # Remote '
 	dots <- match.call(expand.dots = FALSE)$...
     if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
         is.character(x), NA, USE.NAMES = FALSE))) 
