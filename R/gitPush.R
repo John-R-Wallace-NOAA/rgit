@@ -12,6 +12,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     if (length(names) == 0L) 
         names <- character()
     list <- .Primitive("c")(list, names)
+	list.R <- paste(list, ".R", sep = "")
     
     HomeDir <- paste0(getwd(), "/")
     
@@ -33,14 +34,14 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     if(verbose) {
        cat("\n\nThe local working directory is: ", HomeDir)
        cat("\n\nThe git URL is: https://github.com/", repoPath., ".git", sep = "")
-       cat("\n\nThe list of files to be pushed is:\n", list)
+       cat("\n\nThe list of files to be pushed is:\n", list.R)
        cat("\n\nFiles and directories cloned from the remote ", repo, " repo:\n", sep = "")
        cat("  ", vapply(list.files(repo), as.character, ""), "\n")
     }
     
     # Copy the files to the local repo, add the files to the repo, and push the repo (only files that are changed are moved, that's how git push works).
     
-    for (i in list)  {
+    for (i in list.R)  {
     
       file.copy(i, paste0(repo, "/", subDir), overwrite = TRUE)
       if(verbose)
@@ -51,7 +52,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     if(verbose) 
         cat("\nWorking directory is now:", getwd(), "\n")
     
-    for (i in paste0(paste0(subDir,"/"), list))  {
+    for (i in paste0(paste0(subDir,"/"), list.R))  {
     
       rgit::git(paste0('add ', i), autoExit = autoExit)
       if(verbose)
@@ -73,9 +74,20 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
        if(verbose) 
           cat("The local", repo, "directory was deleted.\n\n")   
     }
-    
+	
+	if(length(list) == 1)
+	   cat("\nIs the file on the remote repo equal to the local file:\n\n")
+	else
+	   cat("\nAre the files on the remote repo equal to the local files:\n\n")
+	   
+	for( i in list) {
+	
+	   cat("\n", i, ":", gitEqual(list = i), "\n", sep = "")
+    }
+	
     invisible()
 }
+
 
 
 
