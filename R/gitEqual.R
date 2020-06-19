@@ -1,7 +1,8 @@
 
-gitEqual <- function(Func, verbose = FALSE, ...) {
-    
-  Func.Name <- deparse(substitute(Func))
+gitEqual <- function(Func.Name, verbose = FALSE, ...) {
+      
+	if (!(is.character(substitute(Func.Name))))
+           Func.Name <- deparse(substitute(Func.Name))
 	if(verbose) cat("\n\n", Func.Name, "\n")
 	
 	JRWToolBox::Source(paste0(Func.Name, '.R'))
