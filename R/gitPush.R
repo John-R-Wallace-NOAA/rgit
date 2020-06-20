@@ -84,7 +84,10 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
 	
 	cat("Pausing for 30 seconds to let the remote repo update\n")
 	Sys.sleep(10); cat("10 secs\n")
+	cat("\n\nIf the repo is slow, later try: rgit::gitEqual(<single_file>) on any file not found equal.\n\n")
 	Sys.sleep(10); cat("20 secs\n")
+	cat("\n\nIf there still is an issue make sure all arguments are spelled out fully, and try,  
+             in this order: verbose = TRUE, autoExit = FALSE, and deleteRepoAfterPush = FALSE.\n\n")
 	Sys.sleep(10); cat("30 secs\n")
 	
 	for( i in list) {
