@@ -78,13 +78,14 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     }
 	
 	if(length(list) == 1)
-	   cat("\nIs the file on the remote repo equal to the local file:\n\n")
+	   cat("\nIs the file on the remote repo equal to the local file?:\n\n")
 	else
-	   cat("\nAre the files on the remote repo equal to the local files:\n\n")
+	   cat("\nAre the files on the remote repo equal to the local files?:\n\n")
 	
-	cat("Pausing for 20 seconds to let the remote repo update\n")
+	cat("Pausing for 30 seconds to let the remote repo update\n")
 	Sys.sleep(10); cat("10 secs\n")
 	Sys.sleep(10); cat("20 secs\n")
+	Sys.sleep(10); cat("30 secs\n")
 	
 	for( i in list) {
 	
