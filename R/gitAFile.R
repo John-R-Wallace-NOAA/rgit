@@ -29,7 +29,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
            URL <- paste0('https://raw.githubusercontent.com/', URL)
            
     if(verbose) {
-           cat("\n\n"); print(URL); cat("\n\n")
+           cat("\n\n"); print(URL); cat("\n")
     }
     
     if(grepl(type, "csv"))         
