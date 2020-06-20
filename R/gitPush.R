@@ -52,8 +52,10 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     if(verbose) 
         cat("\nWorking directory is now:", getwd(), "\n")
     
-    for (i in paste0(paste0(subDir,"/"), list.R))  {
+    for (i in list.R)  {
     
+      if(!is.null(subDir))
+	 i <- paste0(subDir,"/", i)
       rgit::git(paste0('add ', i), autoExit = autoExit)
       if(verbose)
          cat("\n", i, "was added to the local repo.\n")
@@ -87,7 +89,6 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
 	
     invisible()
 }
-
 
 
 
