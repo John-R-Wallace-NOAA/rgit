@@ -37,6 +37,9 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
   
     
     if(grepl(type, "function") | grepl(type, "script")) {
+        if(verbose) {
+           cat("\n"); head(readLines(textConnection(getURL(URL))), 20); cat("\n")
+        }
         if(is.null(File))
            File.ASCII <- tempfile()
         else 
@@ -48,8 +51,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
        
     if(grepl(type, "function")) {
           s.name <- Source(File.ASCII)
-          if(verbose)
-             cat("\n", s.name, "\n")
+          cat("\n", s.name, "\n")
           if(run) 
             eval(parse(text = s.name), envir = globalenv())(...)
           if(show)
@@ -108,10 +110,12 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     }
      
     if(grepl(type, "pdfGitHub")) { 
-        JRWToolBox::browseGitPDF(URL)
+        rgit::browseGitPDF(URL)
     }
      
 }
+
+
 
 
 
