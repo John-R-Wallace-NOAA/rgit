@@ -38,7 +38,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     
     if(grepl(type, "function") | grepl(type, "script")) {
         if(verbose) {
-           cat("\n"); head(readLines(textConnection(getURL(URL))), 20); cat("\n")
+           cat("\n"); print(head(readLines(textConnection(getURL(URL))), 20)); cat("\n")
         }
         if(is.null(File))
            File.ASCII <- tempfile()

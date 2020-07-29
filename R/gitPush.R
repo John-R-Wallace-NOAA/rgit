@@ -1,8 +1,8 @@
 
 gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R', message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
-                     autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE)  {
+                     autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
-    # Initial setup - the oddity of calling a character vector 'list' keeped from the rm() function code.
+    # Initial setup - the oddity of calling a character vector 'list' kept from the rm() function code.
     
     dots <- match.call(expand.dots = FALSE)$...
     if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
@@ -12,7 +12,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     if (length(names) == 0L) 
         names <- character()
     list <- .Primitive("c")(list, names)
-	list.R <- paste(list, ".R", sep = "")
+    list.R <- paste(list, ".R", sep = "")
     
     HomeDir <- paste0(getwd(), "/")
     
@@ -55,7 +55,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     for (i in list.R)  {
     
       if(!is.null(subDir))
-	 i <- paste0(subDir,"/", i)
+     i <- paste0(subDir,"/", i)
       rgit::git(paste0('add ', i), autoExit = autoExit)
       if(verbose)
          cat("\n", i, "was added to the local repo.\n")
@@ -76,33 +76,37 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
        if(verbose) 
           cat("The local", repo, "directory was deleted.\n\n")   
     }
-	
-	if(length(list) == 1)
-	   cat("\nIs the file on the remote repo equal to the local file?:\n\n")
-	else
-	   cat("\nAre the files on the remote repo equal to the local files?:\n\n")
-	
-	cat("Pausing for 30 seconds to let the remote repo update\n")
-	Sys.sleep(10); cat("10 secs\n")
-	cat("\nIf the repo is slow, later try: rgit::gitEqual(<single_file>) on any file not found equal.\n\n")
-	Sys.sleep(10); cat("20 secs\n")
-	cat("\nIf there still is an issue make sure all arguments are spelled out fully, and try,\n")
-        cat("   in this order: verbose = TRUE, autoExit = FALSE, and deleteRepoAfterPush = FALSE.\n\n")
-	Sys.sleep(10); cat("30 secs\n")
-	
-	for( i in list) {
-	
-	   cat("\n", i, ": ", rgit::gitEqual(list = i, subDir = subDir, verbose = verbose), "\n", sep = "")
+    
+    if(checkEquality) {
+    
+       if(length(list) == 1)
+          cat("\nIs the file on the remote repo equal to the local file?:\n\n")
+       else
+          cat("\nAre the files on the remote repo equal to the local files?:\n\n")
+        
+       cat("\nWith a correct call, gitPush() changes will be seen immediately on the GitHub web site. What takes a little time is for the changes to\n") 
+          cat("   migrate to the '.git' URL where gitEqual() can access them. Under normal conditions, this is no longer then 30 seconds, but can, on rare\n") 
+          cat("   occasions, take substantially longer. The way to check gitPush() changes, with no chance of delay, is to look at the repo on GitHub.\n")
+          cat("   (A date and time stamp, in a comment on top of the file may be quicker then looking for changes in a file.)\n\n")  
+     
+       cat("Pausing for 30 seconds to let the remote repo update\n")
+       Sys.sleep(10); cat("10 secs\n")
+       
+       cat("\nWithout looking on GitHub, if the repo is slow to update, later try: rgit::gitEqual(<single_file>) on any file not found equal.\n\n")
+       Sys.sleep(10); cat("20 secs\n")
+ {      
+       cat("\nIf there still is an issue make sure all arguments are spelled out fully, and try in this order: verbose = TRUE in the gitEqual() call;,\n")
+           cat("    verbose = TRUE, autoExit = FALSE, and deleteRepoAfterPush = FALSE in the gitPush() call (changing one at a time).\n")
+           
+       cat("\nAfter becoming comfortable with gitPush()'s success, one can use 'gitPushQ()', which is a wrapper for gitPush()\n") 
+          cat("    with checkEquality = FALSE as the default (and hence Quicker).\n\n") }
+       Sys.sleep(10); cat("30 secs\n")
+       
+       for(i in list) {
+       
+          cat("\n", i, ": ", rgit::gitEqual(list = i, subDir = subDir, verbose = verbose), "\n", sep = "")
+      }
     }
-	
     invisible()
 }
-
-
-
-
-
-
-
-
 

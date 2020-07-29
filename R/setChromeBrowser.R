@@ -5,7 +5,7 @@ setChromeBrowser <- function( forceChrome = TRUE)  {
       options(browser = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
    
    if(!forceChrome)
-      options(browser = NULL)
+      options(browser = NULL) # Use default browser
 }
-
+ 
 
