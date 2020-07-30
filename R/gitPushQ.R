@@ -1,7 +1,7 @@
 
 gitPushQ <- function(..., verbose = FALSE, checkEquality = FALSE) {
     
-   # The oddity of calling a character vector 'list' keeped from the rm() function code.
+   # The oddity of calling a character vector 'list' kept from the rm() function code.
    dots <- match.call(expand.dots = FALSE)$...
    if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
        is.character(x), NA, USE.NAMES = FALSE))) 
