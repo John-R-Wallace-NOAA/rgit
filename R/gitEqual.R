@@ -31,7 +31,7 @@ gitEqual <- function(..., list = character(), Func, subDir = 'R', verbose = FALS
 	   cat("\n")
     }
     
-    print(out <- all.equal(Local, Remote))
+    print(out <- base::all.equal(Local, Remote))
 	cat("\n")
 	invisible(out)
 }    

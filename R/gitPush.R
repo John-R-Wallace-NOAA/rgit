@@ -2,6 +2,7 @@
 gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R', message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
                      autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
+    # To not use a sub-directory set the 'subDir' argument to NULL
     # Initial setup - the oddity of calling a character vector 'list' kept from the rm() function code.
     
     dots <- match.call(expand.dots = FALSE)$...
@@ -110,6 +111,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     }
     invisible()
 }
+
 
 
 
