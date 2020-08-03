@@ -84,7 +84,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
        else
           cat("\nAre the files on the remote repo equal to the local files?:\n\n")
           
-       cat("Pausing for 30 seconds to let the remote repo update\n")
+       cat("Pausing for 30 seconds total to let the remote repo update\n")
        Sys.sleep(10); cat("10 secs\n")    
         
        cat("\nWith a correct call, gitPush() changes will be seen immediately on the GitHub web site. What takes a little time is for the changes to\n") 
