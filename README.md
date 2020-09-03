@@ -130,4 +130,20 @@ and remove the entry for the current account.  See:  https://snede.net/git-does-
 
 On next use of the Windows git app, where credentials are needed e.g. doing a push, you will be prompted for the different account's credentials.
 
+#
+Retrieving Git info from R
+
+Get a situation report on your current Git/GitHub status:
+
+    usethis::git_sitrep()
+    
+Retrieve GitHub personal access token:
+
+   devtools::github_pat()
+   
+   
+    
+    
+
+
 
