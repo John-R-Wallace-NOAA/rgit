@@ -128,6 +128,6 @@ To change accounts, that the Windows git app uses, go to:
 
 and remove the entry for the current account.  See:  https://snede.net/git-does-not-remember-username-password/
 
-On next use of the Windows git app you will be prompted for the different account's credentials.
+On next use of the Windows git app, where credentials are needed e.g. doing a push, you will be prompted for the different account's credentials.
 
 
