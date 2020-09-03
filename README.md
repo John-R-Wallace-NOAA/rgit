@@ -32,7 +32,7 @@ All these steps are in the function gitPush() which can be called with autoExit 
 The default subdirectory to pus to is 'R'; to push a file to the main root of a repo use: subDir = NULL
 
 #
-### More example usage with additional information:
+### More example usage with additional information
 
 Look at the git() wrapper function and show how it could be pushed back to this repo (with the correct permissions):
 
@@ -120,7 +120,7 @@ Checking that files in the remote repo are same as those in the local working di
     rm(gitPush_Git, gitPush_Remote)
 
 # 
-### Changing accounts:
+### Changing accounts
 
 To change accounts, that the Windows git app uses, go to:
 

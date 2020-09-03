@@ -1,5 +1,5 @@
 
-gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, show = FALSE, viewOnly = FALSE, 
+gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "Binary", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, show = FALSE, viewOnly = FALSE, 
                       deleteFileObj = ifelse(is.null(File), TRUE, FALSE), rawGitPrefix = TRUE, verbose = FALSE, ...) 
 {
   # Example:  gitAFile("John-R-Wallace-NOAA/rgit/master/R/gitAFile.R")
@@ -68,14 +68,14 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
           file.show(File.ASCII)
     }
      
-    if(any(type %in% c("RData", "RPckageZip"))) {
+    if(type %in% c("RData", "RPckageZip", "Binary")) {
         # https://stackoverflow.com/questions/18833031/download-rdata-and-csv-files-from-ftp-using-rcurl-or-any-other-method 
         # test <- load(rawConnection(getBinaryURL(URL)))  # Does not work for me on binary RData files 
         
         if(is.null(File)) {
           if(type %in% "RPckageZip") 
              File.BINARY <- tempfile(fileext = ".zip")
-          if(type %in% "RData")
+          else
              File.BINARY <- tempfile()        
        } else {
           File.BINARY <- File
@@ -114,6 +114,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     }
      
 }
+
 
 
 
