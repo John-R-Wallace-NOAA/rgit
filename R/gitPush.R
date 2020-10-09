@@ -1,13 +1,12 @@
 
-gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R', message = "Changed with rgit", gitUserName = gitName, gitUserEmail = gitEmail, 
-                     autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
+gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R', message = "Changed with rgit", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
+                     gitUserEmail = gitEmail, autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
     # To not use a sub-directory set the 'subDir' argument to NULL
     # Initial setup - the oddity of calling a character vector 'list' kept from the rm() function code.
     
     dots <- match.call(expand.dots = FALSE)$...
-    if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || 
-        is.character(x), NA, USE.NAMES = FALSE))) 
+    if (length(dots) && !all(vapply(dots, function(x) is.symbol(x) || is.character(x), NA, USE.NAMES = FALSE))) 
         stop("... must contain names or character strings")
     names <- vapply(dots, as.character, "")
     if (length(names) == 0L) 
@@ -56,11 +55,28 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     for (i in list.R)  {
     
       if(!is.null(subDir))
-     i <- paste0(subDir,"/", i)
+          i <- paste0(subDir,"/", i)
       rgit::git(paste0('add ', i), autoExit = autoExit)
       if(verbose)
          cat("\n", i, "was added to the local repo.\n")
     }
+    
+    if(roxygenize) {
+    
+       require(roxygen2)
+       roxygen2::roxygenize(clean = clean)
+       
+       for (i in list)  {
+         i <- paste0("man/", i, ".Rd")
+         rgit::git(paste0('add ', i), autoExit = autoExit)
+         if(verbose)
+            cat("\n", i, "was added to the local repo.\n")
+       } 
+       rgit::git('add DESCRIPTION', autoExit = autoExit)
+       rgit::git('add NAMESPACE', autoExit = autoExit)
+       if(verbose)
+            cat("DESCRIPTION and NAMESPACE were added to the local repo.\n")
+    }    
     
     rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '"'), autoExit = autoExit)  # The message text needs double quotes (") to work
     rgit::git('push -u -v --force-with-lease origin master', autoExit = autoExit) 
@@ -111,6 +127,8 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     }
     invisible()
 }
+
+
 
 
 
