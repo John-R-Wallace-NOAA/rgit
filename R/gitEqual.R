@@ -24,7 +24,7 @@ gitEqual <- function(..., list = character(), Func, subDir = 'R', verbose = FALS
     }
     
     argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = TRUE, verbose = verbose, subDir = subDir)
-    Remote <- do.call(S, argList)
+    Remote <- do.call(rgit::S, argList)
     if(verbose) {
        cat("\n\nRemote on ", repoPath, ":\n\n", sep = "")
        print(Remote); flush.console()
@@ -36,6 +36,7 @@ gitEqual <- function(..., list = character(), Func, subDir = 'R', verbose = FALS
 	invisible(out)
 }    
     
+
 
 
 

@@ -1,5 +1,5 @@
 
-gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R', message = "Changed with rgit", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
+gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
                      gitUserEmail = gitEmail, autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
     # To not use a sub-directory set the 'subDir' argument to NULL
@@ -29,7 +29,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     # Download function and scripts from GitHub (you will be asked once for your password, if you are not already logged into GitHub).
     rgit::git(paste0("config --global user.name --replace-all '", gitUserName, "'"), autoExit = autoExit)
     rgit::git(paste0("config --global user.email --replace-all '", gitUserEmail, "'"), autoExit = autoExit)
-    rgit::git(paste0("clone https://github.com/", repoPath., ".git"), autoExit = autoExit)
+    rgit::git(paste0("clone -b ", branch,  " https://github.com/", repoPath., ".git"), autoExit = autoExit)
     
     if(verbose) {
        cat("\n\nThe local working directory is: ", HomeDir)
@@ -79,7 +79,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, subDir = 'R',
     }    
     
     rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '"'), autoExit = autoExit)  # The message text needs double quotes (") to work
-    rgit::git('push -u -v --force-with-lease origin master', autoExit = autoExit) 
+    rgit::git(paste0('push -u -v --force-with-lease origin ', branch), autoExit = autoExit) 
         
     if(verbose)
        cat(paste0("\nFiles that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
