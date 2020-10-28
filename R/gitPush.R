@@ -1,5 +1,5 @@
 
-gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
+gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", message2 = "", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
                      gitUserEmail = gitEmail, autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
     # To not use a sub-directory set the 'subDir' argument to NULL
@@ -78,7 +78,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
             cat("DESCRIPTION and NAMESPACE were added to the local repo.\n")
     }    
     
-    rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '"'), autoExit = autoExit)  # The message text needs double quotes (") to work
+    rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '" -m"', message2, '"'), autoExit = autoExit)  # The message text needs double quotes (") to work
     rgit::git(paste0('push -u -v --force-with-lease origin ', branch), autoExit = autoExit) 
         
     if(verbose)
@@ -122,11 +122,12 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
        
        for(i in list) {
        
-          cat("\n", i, ": ", rgit::gitEqual(list = i, subDir = subDir, verbose = verbose), "\n", sep = "")
+          cat("\n", i, ": ", rgit::gitEqual(list = i, branch = branch, subDir = subDir, verbose = verbose), "\n", sep = "")
       }
     }
     invisible()
 }
+
 
 
 

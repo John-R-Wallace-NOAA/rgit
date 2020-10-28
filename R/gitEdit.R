@@ -1,5 +1,5 @@
-gitEdit <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "/master/"),
-                paste0(repoPath., "/master/", subDir, "/")), repoPath. = repoPath, subDir = 'R', ...)
+gitEdit <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "/", branch, "/"), 
+      paste0(repoPath., "/", branch, "/", subDir, "/")), branch = 'master', repoPath. = repoPath, subDir = 'R', ...)
 {
    if (!(is.character(substitute(File)))) 
         File <- paste0(deparse(substitute(File)), ".R")
@@ -17,6 +17,7 @@ gitEdit <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "
     
     invisible()
 }
+
 
 
 
