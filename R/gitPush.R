@@ -1,6 +1,6 @@
 
-gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", messageB = "", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
-                     gitUserEmail = gitEmail, autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
+gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", message2 = " ", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
+                     gitUserEmail = gitEmail, autoExit = TRUE, autoExitCP = autoExit, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
     # To not use a sub-directory set the 'subDir' argument to NULL
     # Initial setup - the oddity of calling a character vector 'list' kept from the rm() function code.
@@ -78,8 +78,8 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
             cat("DESCRIPTION and NAMESPACE were added to the local repo.\n")
     }    
     
-    rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '" -m"', message2, '"'), autoExit = autoExit)  # The message text needs double quotes (") to work
-    rgit::git(paste0('push -u -v --force-with-lease origin ', branch), autoExit = autoExit) 
+    rgit::git(paste0('commit --amend --no-edit --allow-empty -m"', message, '" -m"', message2, '"'), autoExit = autoExitCP)  # The message text needs double quotes (") to work
+    rgit::git(paste0('push -u -v --force-with-lease origin ', branch), autoExit = autoExitCP) 
         
     if(verbose)
        cat(paste0("\nFiles that are changed in the local repo of ", repo, " have been pushed to GitHub.\n"))
@@ -112,12 +112,12 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
        cat("\nWithout looking on GitHub, if the repo is slow to update, later try: rgit::gitEqual(<single_file>) on any file not found equal.\n\n")
        Sys.sleep(10); cat("20 secs\n")
     
-       cat("\nIf there still is an issue make sure all arguments are spelled out fully, and try in this order: verbose = TRUE in the gitEqual() call;,\n")
-           cat("    verbose = TRUE, autoExit = FALSE, and deleteRepoAfterPush = FALSE in the gitPush() call (changing one at a time).\n")
+       cat("\nIf there still is an issue make sure all arguments are spelled out fully and try in this order:\n")
+          cat("    verbose = TRUE, autoExit = FALSE, and deleteRepoAfterPush = FALSE in the gitPush() call (changing one at a time).\n")
            
        cat("\nAfter becoming comfortable with gitPush()'s success, one can use 'gitPushQ()', which is a wrapper for gitPush()\n") 
-          cat("    with checkEquality = FALSE as the default (and hence Quicker).\n") 
-          cat("    Hence, another approach is to first run gitPushQ(), pause, and then check with gitEqual(). Repeat if gitEqual() is FALSE.\n\n")
+          cat("    with checkEquality = FALSE as the default (and hence Quicker). Therefore, another approach is to first run gitPushQ(),\n") 
+          cat("    pause, and then check with gitEqual(). Repeat if gitEqual() is FALSE.\n\n")
        Sys.sleep(10); cat("30 secs\n")
        
        for(i in list) {
@@ -127,6 +127,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
     }
     invisible()
 }
+
 
 
 
