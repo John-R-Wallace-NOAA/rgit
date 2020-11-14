@@ -1,5 +1,5 @@
 
-gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", message2 = "", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
+gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'master', subDir = 'R', message = "Changed with rgit", messageB = "", roxygenize = FALSE, clean = FALSE, gitUserName = gitName, 
                      gitUserEmail = gitEmail, autoExit = TRUE, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
     # To not use a sub-directory set the 'subDir' argument to NULL
