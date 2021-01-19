@@ -49,8 +49,8 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
            on.exit(setwd(homeDir), add = TRUE)
            on.exit(system(paste0("rm -r -f ", tempDir)), add = TRUE)
         }           
-        writeLines(paste0('source("', readLines(textConnection(xml2::download_html(URL))), ')")'), File.ASCII)
-		source(File.ASCII, local = parent.env(environment()))
+        writeLines(paste0('source("', readLines(textConnection(xml2::download_html(URL))), '")'), File.ASCII)
+        source(File.ASCII, local = parent.env(environment()))
     } 
        
     if(grepl(type, "function")) {
