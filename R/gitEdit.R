@@ -4,6 +4,7 @@ gitEdit <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "
     if (!(is.character(substitute(File)))) 
         File <- paste0(deparse(substitute(File)), ".R")
     
+    '  # xml2::download_html() in gitAFile() saves basename(url) =  < File >.R to the working directory.  '
     rgit::gitAFile(paste0(gitPath, File), deleteFileObj = FALSE, show = FALSE, ...)
     
     if (file.exists("W:/Win_apps/npp/notepad++.exe")) 
@@ -15,5 +16,6 @@ gitEdit <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "
     if (file.exists("C:/Program Files/Notepad++/notepad++.exe")) 
         system(paste0("C:/Windows/System32/cmd.exe /C start \"\" \"C:/Program Files/Notepad++/notepad++.exe\" \"", 
             getwd(), "/", File, "\""))
+  
     invisible()
 }
