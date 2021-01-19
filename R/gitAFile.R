@@ -10,7 +10,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
   # See displaying pdf's from GitHub: https://webapps.stackexchange.com/questions/48061/can-i-trick-github-into-displaying-the-pdf-in-the-browser-instead-of-downloading 
   
     JRWToolBox::lib(xml2)
-	JRWToolBox::lib(RCurl)
+    JRWToolBox::lib(RCurl)
     Source <- function(file, ...) {
         ls.ext <- function(file) {
             local({
@@ -41,17 +41,24 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
            File.ASCII <- tempfile()
         else 
            File.ASCII <- File
-        writeLines(paste0('source("', readLines(textConnection(xml2::download_html(URL))), '")'), File.ASCII)
-        if(deleteFileObj)
-           on.exit(file.remove(File.ASCII), add = TRUE)
+        if(deleteFileObj)  {
+           on.exit(file.remove(File.ASCII))
+           homeDir <- getwd()
+           tempDir <- tempfile()
+           dir.create(tempDir); setwd(tempDir)
+           on.exit(setwd(homeDir), add = TRUE)
+           on.exit(system(paste0("rm -r -f ", tempDir)), add = TRUE)
+        }           
+        writeLines(paste0('source("', readLines(textConnection(xml2::download_html(URL))), ')")'), File.ASCII)
+		source(File.ASCII, local = parent.env(environment()))
     } 
        
     if(grepl(type, "function")) {
           s.name <- readLines(textConnection(xml2::download_html(URL)))
           if(verbose) {
-             cat("\n"); print(readLines(s.name, 20), quote = FALSE); cat("\n")
+             cat("\n"); print(readLines(s.name, 20, quote = FALSE)); cat("\n")
           }
-          s.name <- JRWToolBox::get.subs(s.name, '.')
+          s.name <- JRWToolBox::get.subs(File, '.')
           s.name <- s.name[-length(s.name)]
           s.name <- paste(s.name, collapse = '.')
           cat("\n", s.name, "\n")
