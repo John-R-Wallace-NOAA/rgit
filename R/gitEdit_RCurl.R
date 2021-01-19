@@ -1,4 +1,4 @@
-gitEdit <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "/", branch, "/"), 
+gitEdit_RCurl <- function (File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "/", branch, "/"), 
       paste0(repoPath., "/", branch, "/", subDir, "/")), branch = 'master', repoPath. = repoPath, subDir = 'R', ...)
 {
    if (!(is.character(substitute(File)))) 
