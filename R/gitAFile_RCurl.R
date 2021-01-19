@@ -1,5 +1,5 @@
 
-gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "Binary", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, show = FALSE, viewOnly = FALSE, 
+gitAFile_RCurl <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "Binary", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, show = FALSE, viewOnly = FALSE, 
                       deleteFileObj = ifelse(is.null(File), TRUE, FALSE), rawGitPrefix = TRUE, verbose = FALSE, ...) 
 {
   # Example:  gitAFile("John-R-Wallace-NOAA/rgit/master/R/gitAFile.R")
