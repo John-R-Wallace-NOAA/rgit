@@ -1,3 +1,4 @@
+
 gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "Binary", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, show = FALSE, viewOnly = FALSE, 
                       deleteFileObj = ifelse(is.null(File), TRUE, FALSE), rawGitPrefix = TRUE, verbose = FALSE, ...) 
 {
@@ -9,8 +10,13 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
   # Or directly using browseGitPDF: rgit::browseGitPDF("https://github.com/James-Thorson/VAST/blob/master/manual/VAST_model_structure.pdf")
   # See displaying pdf's from GitHub: https://webapps.stackexchange.com/questions/48061/can-i-trick-github-into-displaying-the-pdf-in-the-browser-instead-of-downloading 
   
-    JRWToolBox::lib(xml2)
-    JRWToolBox::lib(RCurl)
+    JRWToolBox::lib(httr)
+
+    getURL <- function(url) {
+        getTMP <- httr::GET(url)
+        httr::content(getTMP)
+    }
+     
     Source <- function(file, ...) {
         ls.ext <- function(file) {
             local({
@@ -21,6 +27,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
         base::source(file, ...)
         ls.ext(file)
     }
+    
     # ------------------------------------
     
     URL <- paste(strsplit(URL," ")[[1]], collapse = '%20')
@@ -37,30 +44,20 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
   
     
     if(grepl(type, "function") | grepl(type, "script")) {
+        if(verbose) {
+           cat("\n"); print(head(readLines(textConnection(getURL(URL))), 20)); cat("\n")
+        }
         if(is.null(File))
            File.ASCII <- tempfile()
         else 
            File.ASCII <- File
-        if(deleteFileObj)  {
-           on.exit(file.remove(File.ASCII))
-           homeDir <- getwd()
-           tempDir <- tempfile()
-           dir.create(tempDir); setwd(tempDir)
-           on.exit(setwd(homeDir), add = TRUE)
-           on.exit(system(paste0("rm -r -f ", tempDir)), add = TRUE)
-        }           
-        writeLines(paste0('source("', readLines(textConnection(xml2::download_html(URL))), '")'), File.ASCII)
-        source(File.ASCII, local = parent.env(environment()))
+        writeLines(paste(readLines(textConnection(getURL(URL))), collapse = "\n"), File.ASCII)
+        if(deleteFileObj)
+           on.exit(file.remove(File.ASCII), add = TRUE)
     } 
        
     if(grepl(type, "function")) {
-          s.name <- readLines(textConnection(xml2::download_html(URL)))
-          if(verbose) {
-             cat("\n"); print(readLines(s.name, 20), quote = FALSE); cat("\n")
-          }
-          s.name <- JRWToolBox::get.subs(s.name, '.')
-          s.name <- s.name[-length(s.name)]
-          s.name <- paste(s.name, collapse = '.')
+          s.name <- Source(File.ASCII)
           cat("\n", s.name, "\n")
           if(run) 
             eval(parse(text = s.name), envir = globalenv())(...)
@@ -124,3 +121,9 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     }
      
 }
+
+
+
+
+
+

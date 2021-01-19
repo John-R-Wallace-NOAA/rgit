@@ -1,14 +1,11 @@
 
-sourceFunctionURL <- function (URL) {
+sourceFunctionURL <- function (URL) 
+{
     " # For more functionality, see gitAFile() in the rgit package ( https://github.com/John-R-Wallace-NOAA/rgit ) which includes gitPush() and git() "
-    require(xml2)
+    require(httr)
     File.ASCII <- tempfile()
     on.exit(file.remove(File.ASCII))
-	homeDir <- getwd()
-    tempDir <- tempfile()
-    dir.create(tempDir); setwd(tempDir)
-    on.exit(setwd(homeDir), add = TRUE)
-    on.exit(system(paste0("rm -r -f ", tempDir)), add = TRUE)
-    writeLines(paste0('source("', readLines(textConnection(xml2::download_html(URL))), '")'), File.ASCII)
+    getTMP <- httr::GET(url)
+    writeLines(paste(readLines(textConnection(httr::content(getTMP))), collapse = "\n"), File.ASCII)
     source(File.ASCII, local = parent.env(environment()))
 }
