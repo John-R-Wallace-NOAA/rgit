@@ -56,9 +56,9 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     if(grepl(type, "function")) {
           s.name <- readLines(textConnection(xml2::download_html(URL)))
           if(verbose) {
-             cat("\n"); print(readLines(s.name, 20, quote = FALSE)); cat("\n")
+             cat("\n"); print(readLines(s.name, 20), quote = FALSE); cat("\n")
           }
-          s.name <- JRWToolBox::get.subs(File, '.')
+          s.name <- JRWToolBox::get.subs(s.name, '.')
           s.name <- s.name[-length(s.name)]
           s.name <- paste(s.name, collapse = '.')
           cat("\n", s.name, "\n")
