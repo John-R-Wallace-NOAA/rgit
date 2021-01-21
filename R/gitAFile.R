@@ -84,9 +84,9 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
              File.BINARY <- tempfile(fileext = ".zip")
           else
              File.BINARY <- tempfile()        
-       } else {
+        } else {
           File.BINARY <- File
-    }
+        }
         
        download.file(URL, File.BINARY, mode = 'wb')
        
@@ -94,7 +94,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
           if(show)
              JRWToolBox::load(File.BINARY)
           if(!show)
-             base::load(File.BINARY)
+             base::load(File.BINARY, ".GlobalEnv")
     }
        
     if(type %in% "RPckageZip") {
