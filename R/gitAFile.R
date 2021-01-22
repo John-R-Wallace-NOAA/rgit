@@ -94,7 +94,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
           if(show)
              JRWToolBox::load(File.BINARY)
           if(!show)
-             base::load(File.BINARY, ".GlobalEnv")
+             base::load(File.BINARY, .GlobalEnv)
     }
        
     if(type %in% "RPckageZip") {
