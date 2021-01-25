@@ -6,7 +6,7 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
-The git() function is a wrapper for the git app, and hence any git action can be done from within R. For example, assume 'gitPush.R' with a changed comment is in the current working directory. Below are the steps for pushing 'gitPush.R' with a 'Comment change' message. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given in the Command Window (git push requires the correct permissions):
+The git() function is a wrapper for the git app, and hence any git action can be done from within R. For example, assume 'gitPush.R' with a changed comment is in the current working directory. Below are the steps for pushing 'gitPush.R' with a 'Comment changed' message. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given in the Command Window (git push requires the correct permissions):
 
     getwd()  # Check working directory
     file.show('gitPush.R')   # Check the file in the working directory that is to be pushed 
@@ -18,7 +18,7 @@ The git() function is a wrapper for the git app, and hence any git action can be
     file.copy('gitPush.R', 'rgit/R', overwrite = TRUE)
     setwd('rgit')
     git('add R/gitPush.R', autoExit = FALSE)
-    git('commit --amend --no-edit -m"Comment change"', autoExit = FALSE) # The informative comment comes after -m
+    git('commit --amend --no-edit -m"Comment changed"', autoExit = FALSE) # The informative comment comes after -m
     git('status', autoExit = FALSE) # This status is confusing (to me at least)
     git('push -u -v --force-with-lease origin master', autoExit = FALSE)  # 'git status' makes sense now.  
     setwd('../')
