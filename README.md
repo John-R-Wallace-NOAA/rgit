@@ -25,9 +25,9 @@ The git() function is a wrapper for the git app, and hence any git action can be
     system("rm -r -f rgit") # Delete repo after push - inspect it before deletion if you like
     getwd()  # Check for original working directory
     
-All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE is a good first step when diagnosing problems. Note that quotes, on the file in current working directory to be pushed, are optional. However, double quotes are needed on the message (being inside single quotes as seen above):
+All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE is a good first step when diagnosing problems. Note that quotes, on the file name in current working directory to be pushed, are optional, and that gitPush() allows single or double quotes on message argument:
 
-    gitPush(gitPush.R, message = "Fixed another comment", verbose = TRUE)   
+    gitPush(gitPush.R, message = 'Fixed another comment', verbose = TRUE)   
     
 The default subdirectory to push to is 'R'; to push a file to the main root of a repo use: subDir = NULL
 
