@@ -3,6 +3,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
                      gitUserEmail = gitEmail, autoExit = TRUE, autoExitCP = autoExit, deleteRepoAfterPush = TRUE, verbose = FALSE, checkEquality = TRUE)  {
 
     # To not use a sub-directory set the 'subDir' argument to NULL
+    
     # Initial setup - the oddity of calling a character vector 'list' kept from the rm() function code.
     
     dots <- match.call(expand.dots = FALSE)$...
@@ -23,6 +24,10 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
        switch(menu(c("Stop?", "Delete the directory and continue?")) + 1,
            stop("Stopped by user."), stop("Stopped by user."), cat("\n"))
     }
+    
+    # Make sure message and message2 arguments have double quotes
+    message <- sprintf(message)
+    message2 <- sprintf(message2)
    
     system(paste0("rm -r -f ", repo)) # Make sure the repo directory is deleted 
     
@@ -127,6 +132,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
     }
     invisible()
 }
+
 
 
 
