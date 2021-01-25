@@ -6,7 +6,7 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
-The git() function is a wrapper for the git app, and hence any git action can be done from within R. Below are the steps for pushing 'gitPush.R' with a 'Comment change' message. Assume 'gitPush.R' with a changed comment is in the current working directory. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given in the Command Window (git push requires the correct permissions):
+The git() function is a wrapper for the git app, and hence any git action can be done from within R. For example, assume 'gitPush.R' with a changed comment is in the current working directory. Below are the steps for pushing 'gitPush.R' with a 'Comment change' message. Here the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given in the Command Window (git push requires the correct permissions):
 
     getwd()  # Check working directory
     file.show('gitPush.R')   # Check the file in the working directory that is to be pushed 
@@ -25,11 +25,11 @@ The git() function is a wrapper for the git app, and hence any git action can be
     system("rm -r -f rgit") # Delete repo after push - inspect it before deletion if you like
     getwd()  # Check for original working directory
     
-All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE would be a good next step. Note that quotes, on the file in current working direcotry to be pushed, are optional:
+All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE is a good first step when diagnosing problems. Note that quotes, on the file in current working directory to be pushed, are optional:
 
     gitPush(gitPush.R, message = 'Fixed another comment', verbose = TRUE)   
     
-The default subdirectory to pus to is 'R'; to push a file to the main root of a repo use: subDir = NULL
+The default subdirectory to push to is 'R'; to push a file to the main root of a repo use: subDir = NULL
 
 #
 ### More example usage with additional information
@@ -110,7 +110,7 @@ Verbose output with 2 files (git.R & gitPush.R) being pushed and the default rem
     
     The local rgit directory was deleted.
     
-On first use in a new repo, doublecheck that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
+On first use in a new repo, double check that the commit times on GitHub are recently changed.  Only files with actual changes will have recently changed commit times.
 
 Checking that files in the remote repo are same as those in the local working directory can be accomplished by following this example with gitPush:
 
