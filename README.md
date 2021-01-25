@@ -6,7 +6,7 @@ Install with:
 
 rgit requires the git app (https://git-scm.com/downloads) to be installed.  You will be asked for user credentials at first use.
 #
-The git() function is a wrapper for the git app, and hence any git action can be done from within R. For example, assume 'gitPush.R' with a changed comment is in the current working directory. Below are the steps for pushing 'gitPush.R' with a 'Comment changed' message. Note that the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given in the Command Window (git push requires the correct permissions):
+The git() function is a wrapper for the git app, and hence any git action can be done from within R. For example, assume 'gitPush.R' with a changed comment is in the current working directory. Below are the steps for pushing 'gitPush.R' with a "Comment changed" message (double quotes are needed on the message). Note that the argument 'autoExit' is set to FALSE, so that each step in the Command Window can be inspected. Type 'exit' to exit the Command Window to move to the next step. Once the repo is cloned, 'git status' or any other git command can be given in the Command Window (git push requires the correct permissions):
 
     getwd()  # Check working directory
     file.show('gitPush.R')   # Check the file in the working directory that is to be pushed 
@@ -27,7 +27,7 @@ The git() function is a wrapper for the git app, and hence any git action can be
     
 All these steps are in the function gitPush() which can be called with autoExit = FALSE, but using verbose = TRUE is a good first step when diagnosing problems. Note that quotes, on the file in current working directory to be pushed, are optional:
 
-    gitPush(gitPush.R, message = 'Fixed another comment', verbose = TRUE)   
+    gitPush(gitPush.R, message = "Fixed another comment", verbose = TRUE)   
     
 The default subdirectory to push to is 'R'; to push a file to the main root of a repo use: subDir = NULL
 
