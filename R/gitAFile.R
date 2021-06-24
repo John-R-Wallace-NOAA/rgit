@@ -1,6 +1,6 @@
 
 gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPckageZip", "Binary", "pdfGitHub")[1], File = NULL, shortName = NULL, run = FALSE, 
-                      showNameOnly= TRUE, show = FALSE, viewOnly = FALSE, deleteFileObj = ifelse(is.null(File), TRUE, FALSE), rawGitPrefix = TRUE, verbose = FALSE, ...) 
+                      showNameOnly = TRUE, show = FALSE, viewOnly = FALSE, deleteFileObj = ifelse(is.null(File), TRUE, FALSE), rawGitPrefix = TRUE, verbose = FALSE, ...) 
 {
   # Example:  gitAFile("John-R-Wallace-NOAA/rgit/master/R/gitAFile.R")
   # Adds the raw GitHub prefix to create a full URL when type = "function", i.e.: paste0("https://raw.githubusercontent.com", "John-R-Wallace-NOAA/JRWToolBox@master/R/panel.conf.pred.band.R") 
