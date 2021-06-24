@@ -10,7 +10,7 @@ S_tidy <- function(File, gitPath = ifelse(is.null(subDir), paste0(repoPath., "/"
         
     if (!(is.character(substitute(File))))
         File <- paste0(deparse(substitute(File)), ".R")
-    rgit::gitAFile(paste0(gitPath, File), File = tempFile.R, ...)     
+    rgit::gitAFile(paste0(gitPath, File), File = tempFile.R, showNameOnly = FALSE, ...)     
     
     formatR::tidy_source(tempFile.R)
 }
