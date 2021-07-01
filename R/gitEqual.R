@@ -29,12 +29,12 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
     if(verbose) {
        cat("\n\nRemote on ", repoPath, ":\n\n", sep = "")
        print(Remote); flush.console()
-	   cat("\n")
+       cat("\n")
     }
     
     print(out <- base::all.equal(Local, Remote))
-	cat("\n")
-	invisible(out)
+    cat("\n")
+    invisible(out)
 }    
     
 
