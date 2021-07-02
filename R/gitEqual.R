@@ -29,7 +29,7 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
      } else
        on.exit(rm(list = Func.Name, pos = globalenv())) # viewOnly arg doesn't appear to work in gitAFile() when called inside a function ???
     
-    argList <- list(paste0(Func.Name, '.R'), show = FALSE, inherits = FALSE), branch = branch, subDir = subDir, verbose = verbose)
+    argList <- list(paste0(Func.Name, '.R'), show = FALSE, inherits = FALSE, branch = branch, subDir = subDir, verbose = verbose)
     Remote <- do.call(rgit::S, argList)
     
     
