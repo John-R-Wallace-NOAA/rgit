@@ -1,5 +1,4 @@
 
-
 gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', verbose = FALSE) {
     
     dots <- match.call(expand.dots = FALSE)$...
@@ -23,13 +22,13 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
         print(Local); flush.console()
     }
     
-    if(exists(Func.Name, where = globalenv()))  { 
+    if(exists(Func.Name, where = globalenv(), inherits = FALSE))  { 
        OLD <- get(Func.Name, pos = globalenv())
        on.exit(assign(Func.Name, OLD, pos = globalenv()))
      } else
        on.exit(rm(list = Func.Name, pos = globalenv())) # viewOnly arg doesn't appear to work in gitAFile() when called inside a function ???
     
-    argList <- list(paste0(Func.Name, '.R'), show = FALSE, inherits = FALSE, branch = branch, subDir = subDir, verbose = verbose)
+    argList <- list(paste0(Func.Name, '.R'), show = FALSE, branch = branch, subDir = subDir, verbose = verbose)
     Remote <- do.call(rgit::S, argList)
     
     
@@ -45,5 +44,4 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
     invisible(out)
 }    
     
-
 

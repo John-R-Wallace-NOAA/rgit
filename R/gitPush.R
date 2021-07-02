@@ -114,7 +114,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
           cat("   occasions, take substantially longer. The way to check gitPush() changes, with no chance of delay, is to look at the repo on GitHub.\n")
           cat("   (A date and time stamp, in a comment on top of the file may be quicker then looking for changes in a file.)\n\n")  
       
-       cat("\nWithout looking on GitHub, if the repo is slow to update, later try: rgit::gitEqual(<single_file>) on any file not found equal.\n\n")
+       cat("\nIf the repo is slow to update an alternative to looking on GitHub is to pause for 20+ secs and then try: rgit::gitEqual(<single_file>) on any file not found equal.\n\n")
        Sys.sleep(10); cat("20 secs\n")
     
        cat("\nIf there still is an issue make sure all arguments are spelled out fully and try in this order:\n")
@@ -132,6 +132,7 @@ gitPush <- function(..., list = character(), repoPath. = repoPath, branch = 'mas
     }
     invisible()
 }
+
 
 
 
