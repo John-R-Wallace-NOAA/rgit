@@ -1,5 +1,4 @@
 
-
 gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', verbose = FALSE) {
     
     dots <- match.call(expand.dots = FALSE)$...
@@ -26,18 +25,18 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
     argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = TRUE, branch = branch, subDir = subDir, verbose = verbose)
     Remote <- do.call(rgit::S, argList)
     
+    
     if(verbose) {
        cat("\n\nRemote on ", repoPath, ":\n\n", sep = "")
        print(Remote); flush.console()
        cat("\n")
     }
     
+    environment(Remote) <- environment(Local)
     print(out <- base::all.equal(Local, Remote))
     cat("\n")
     invisible(out)
 }    
     
-
-
 
 
