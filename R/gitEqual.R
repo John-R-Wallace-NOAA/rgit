@@ -12,26 +12,31 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
     Func.Name <- .Primitive("c")(list, names)
     
     if(verbose) {
-       cat("\n\nFunction Name:", Func.Name, "\n\n"); flush.console()
+        cat("\n\nFunction Name:", Func.Name, "\n\n"); flush.console()
     }
     
-    source(paste0(Func.Name, '.R'))
+    source(paste0(Func.Name, '.R'), local = TRUE)
     
     Local <- get(Func.Name)
     if(verbose) {
-      cat("\n\nLocal file in ", getwd(), ":\n\n", sep = "")
-      print(Local); flush.console()
+        cat("\n\nLocal file in ", getwd(), ":\n\n", sep = "")
+        print(Local); flush.console()
     }
     
-    argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = !exists(Func.Name, where = globalenv(), inherits = FALSE), 
-                    branch = branch, subDir = subDir, verbose = verbose)
+    if(exists(Func.Name, where = globalenv()))  { 
+       OLD <- get(Func.Name, pos = globalenv())
+       on.exit(assign(Func.Name, OLD, pos = globalenv()))
+     } else
+       on.exit(rm(list = Func.Name, pos = globalenv())) # viewOnly arg doesn't appear to work in gitAFile() when called inside a function ???
+    
+    argList <- list(paste0(Func.Name, '.R'), show = FALSE, inherits = FALSE), branch = branch, subDir = subDir, verbose = verbose)
     Remote <- do.call(rgit::S, argList)
     
     
     if(verbose) {
-       cat("\n\nRemote on ", repoPath, ":\n\n", sep = "")
-       print(Remote); flush.console()
-       cat("\n")
+        cat("\n\nRemote on ", repoPath, ":\n\n", sep = "")
+        print(Remote); flush.console()
+        cat("\n")
     }
     
     environment(Remote) <- environment(Local)
@@ -40,8 +45,5 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
     invisible(out)
 }    
     
-
-
-
 
 
