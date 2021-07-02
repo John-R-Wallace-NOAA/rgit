@@ -15,7 +15,7 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
        cat("\n\nFunction Name:", Func.Name, "\n\n"); flush.console()
     }
     
-    source(paste0(Func.Name, '.R'), local = TRUE)
+    source(paste0(Func.Name, '.R'))
     
     Local <- get(Func.Name)
     if(verbose) {
