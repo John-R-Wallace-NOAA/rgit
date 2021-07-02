@@ -23,7 +23,8 @@ gitEqual <- function(..., list = character(), branch = 'master', subDir = 'R', v
       print(Local); flush.console()
     }
     
-    argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = !exists(Func.Name, where = 1, inherits = FALSE), branch = branch, subDir = subDir, verbose = verbose)
+    argList <- list(paste0(Func.Name, '.R'), show = FALSE, viewOnly = !exists(Func.Name, where = globalenv(), inherits = FALSE), 
+                    branch = branch, subDir = subDir, verbose = verbose)
     Remote <- do.call(rgit::S, argList)
     
     
