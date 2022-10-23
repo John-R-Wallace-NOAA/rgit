@@ -30,29 +30,35 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     
     # ------------------------------------
     
-    URL <- paste(strsplit(URL," ")[[1]], collapse = '%20')
-    
     if(rawGitPrefix) 
            URL <- paste0('https://raw.githubusercontent.com/', URL)
+           
+    # URL <- paste(strsplit(URL," ")[[1]], collapse = '%20')
+    URL20 <- gsub(' ', '%20', URL)       
            
     if(verbose) {
            cat("\n\n"); print(URL); cat("\n")
     }
     
     if(grepl(type, "csv"))         
-        return(read.csv(textConnection(getURL(URL))))
+        return(read.csv(textConnection(getURL(URL20))))
   
-    
     if(grepl(type, "function") | grepl(type, "script")) {
         if(verbose) {
-           cat("\n"); print(head(readLines(textConnection(getURL(URL))), 20)); cat("\n")
+           cat("\n"); print(head(readLines(textConnection(getURL(URL20))), 20)); cat("\n")
         }
-        if(is.null(File))
-           File.ASCII <- tempfile()
-        else 
+        if(is.null(File)) {
+           if(type == "script") {
+              File.ASCII <- strsplit(URL, "/")[[1]]
+              File.ASCII <- rev(File.ASCII)[1]
+           } else
+             File.ASCII <- tempfile()
+        } else 
            File.ASCII <- File
-        writeLines(paste(readLines(textConnection(getURL(URL))), collapse = "\n"), File.ASCII)
-        if(deleteFileObj)
+        writeLines(paste(readLines(textConnection(getURL(URL20))), collapse = "\n"), File.ASCII)
+        if(verbose) 
+           cat("\n", type, "written to:", File.ASCII, "\n")
+        if(deleteFileObj & is.null(File) & type == "function" )
            on.exit(file.remove(File.ASCII), add = TRUE)
     } 
        
@@ -78,7 +84,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
      
     if(type %in% c("RData", "RPckageZip", "Binary")) {
         # https://stackoverflow.com/questions/18833031/download-rdata-and-csv-files-from-ftp-using-rcurl-or-any-other-method 
-        # test <- load(rawConnection(getBinaryURL(URL)))  # Does not work for me on binary RData files 
+        # test <- load(rawConnection(getBinaryURL(URL20)))  # Does not work for me on binary RData files 
         
         if(is.null(File)) {
           if(type %in% "RPckageZip") 
@@ -89,7 +95,7 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
           File.BINARY <- File
         }
         
-       download.file(URL, File.BINARY, mode = 'wb')
+       download.file(URL20, File.BINARY, mode = 'wb')
        
     if(type %in% "RData") {
           if(show)
@@ -118,10 +124,11 @@ gitAFile <- function (URL, type = c("function", "csv", "script", "RData", "RPcka
     }
      
     if(grepl(type, "pdfGitHub")) { 
-        rgit::browseGitPDF(URL)
+        rgit::browseGitPDF(URL20)
     }
      
 }
+
 
 
 

@@ -139,7 +139,8 @@ Get a situation report on your current Git/GitHub status:
     
 Retrieve GitHub personal access token:
 
-    devtools::github_pat()
+    Sys.getenv('GITHUB_PAT')
+
    
    
     
